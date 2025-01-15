@@ -1512,11 +1512,11 @@ const ThreeScene: React.FC = () => {
 
                         {/* New "Beam Power" Section */}
                         <div style={sectionStyle}>
-                            <h3 style={{ marginBottom: '0.5rem', color: '#555555' }}>Beam Power</h3>
+                            <h3 style={{ marginBottom: '0.5rem', color: '#555555' }}>Beam Energy</h3>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <input
                                     type="range"
-                                    min={0}
+                                    min={0.001}
                                     max={50}
                                     step={0.1}
                                     value={configs.find((c) => c.type === 'beam')?.beamPower || 25}
