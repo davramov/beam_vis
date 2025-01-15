@@ -1,18 +1,6 @@
 /********************************************************
  * ThreeScene.tsx
  *
- * Changes per your requests:
- * 1) Fixed the camera X-position slider so it no longer re-initializes
- *    the entire scene. Now it properly moves the main camera along X.
- * 2) Adjusted the beamstop pivot so it hinges along its left edge
- *    (instead of the bottom). It opens like a door on that edge.
- * 3) Expanded the "centeringMotor" controls to include X and Z movements,
- *    in addition to Y.
- * 4) Updated the monochromator color palette:
- *    - Xtal -> Pink (#FFC0CB)
- *    - Multilayer -> Green (#00FF7F)
- *    - WhiteLight -> White (#ffffff)
- *    The beam cylinder and photon colors change accordingly.
  ********************************************************/
 import React, {
     useEffect,
