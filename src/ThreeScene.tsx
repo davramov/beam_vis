@@ -263,8 +263,8 @@ import React, {
     
     const beamstopShutterRef = useRef<THREE.Mesh | null>(null);
 
-    const raycaster = useMemo(() => new THREE.Raycaster(), []);
-    const mouse = useMemo(() => new THREE.Vector2(), []);
+    // const raycaster = useMemo(() => new THREE.Raycaster(), []);
+    // const mouse = useMemo(() => new THREE.Vector2(), []);
 
     
 
@@ -319,17 +319,17 @@ import React, {
     const [motorY, setMotorY] = useState(0);
     const [motorZ, setMotorZ] = useState(0);
 
-      const rotationRef = useRef({
-    current: 0,        // Current rotation in radians
-    target: 0,         // Target rotation in radians
-    speed: 5,          // Interpolation speed factor
-  });
+  //     const rotationRef = useRef({
+  //   current: 0,        // Current rotation in radians
+  //   target: 0,         // Target rotation in radians
+  //   speed: 5,          // Interpolation speed factor
+  // });
 
-  const beamScaleRef = useRef({
-    current: 1,        // Current scale.x of the beam cylinder
-    target: 1,         // Target scale.x of the beam cylinder
-    speed: 5,          // Interpolation speed factor
-  });
+  // const beamScaleRef = useRef({
+  //   current: 1,        // Current scale.x of the beam cylinder
+  //   target: 1,         // Target scale.x of the beam cylinder
+  //   speed: 5,          // Interpolation speed factor
+  // });
 
   
     /********************************************************
@@ -427,7 +427,7 @@ import React, {
       scene.add(plane);
   
       // Photon InstancedMesh
-      const photonGeometry = new THREE.SphereGeometry(0.05, 8, 8);
+      // const photonGeometry = new THREE.SphereGeometry(0.05, 8, 8);
       const instancedMesh = new THREE.InstancedMesh(geometries.sphere, materials.photon, maxPhotons);
       instancedMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
       scene.add(instancedMesh);
@@ -1537,7 +1537,7 @@ import React, {
                     style={sliderStyle}
                   />
                 </div>
-                {/* <div style={{ marginBottom: '1rem' }}>
+                <div style={{ marginBottom: '1rem' }}>
                   <div style={labelStyle}>Y: {motorY.toFixed(2)}</div>
                   <input
                     type="range"
@@ -1548,7 +1548,7 @@ import React, {
                     onChange={(e) => handleMotorYChange(Number(e.target.value))}
                     style={sliderStyle}
                   />
-                </div> */}
+                </div>
                 <div style={{ marginBottom: '1rem' }}>
                   <div style={labelStyle}>Z: {motorZ.toFixed(2)}</div>
                   <input
