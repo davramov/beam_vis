@@ -260,7 +260,14 @@ import React, {
     const composerRef = useRef<EffectComposer>();
   
     const requestRef = useRef<number>(0);
-  
+    
+    const beamstopShutterRef = useRef<THREE.Mesh | null>(null);
+
+    const raycaster = useMemo(() => new THREE.Raycaster(), []);
+    const mouse = useMemo(() => new THREE.Vector2(), []);
+
+    
+
     // Render target for X-Ray camera
     const xRayRenderTargetRef = useRef<THREE.WebGLRenderTarget>();
   
@@ -694,6 +701,13 @@ import React, {
                   cfg.shutterOpen ?? false
                 );
                 pivot.name = 'beamStop-pivot'; // Name the pivot for easy reference
+
+                // Retrieve the shutter mesh and assign it to the ref
+                const shutterMesh = pivot.getObjectByName('beamStop-shutter') as THREE.Mesh | null;
+                if (shutterMesh) {
+                    beamstopShutterRef.current = shutterMesh;
+                }
+
                 obj = pivot;
                 break;
               }
@@ -1231,6 +1245,8 @@ import React, {
         )
       );
     }, []);
+
+    
   
     const toggleShutter = useCallback(() => {
       setConfigs((prev) =>
