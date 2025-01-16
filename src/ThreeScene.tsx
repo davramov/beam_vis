@@ -600,9 +600,9 @@ import React, {
               if (cfg.beamModes?.includes('cylinder')) {
                 const geom = geometries.cylinder.clone();
                 // Adjust radius/height from config
-                geom.parameters.radiusTop = cfg.geometry?.radius ?? 0.05;
-                geom.parameters.radiusBottom = cfg.geometry?.radius ?? 0.05;
-                geom.parameters.height = cfg.geometry?.height ?? 8;
+                // geom.parameters.radiusTop = cfg.geometry?.radius ?? 0.05;
+                // geom.parameters.radiusBottom = cfg.geometry?.radius ?? 0.05;
+                // geom.parameters.height = cfg.geometry?.height ?? 8;
                 geom.rotateZ(Math.PI / 2);
                 const beamMesh = new THREE.Mesh(geom, materials.beam);
                 beamMesh.name = 'beam-cylinder';
@@ -803,9 +803,9 @@ import React, {
                       // Update material properties if needed
                       const mesh = obj.getObjectByName('beamStop-shutter') as THREE.Mesh | null;
                       if (mesh) {
-                        mesh.material.opacity = cfg.shutterOpen ? 0.5 : 1;
-                        mesh.material.transparent = true;
-                        mesh.material.needsUpdate = true;
+                        // mesh.material.opacity = cfg.shutterOpen ? 0.5 : 1;
+                        // mesh.material.transparent = true;
+                        // mesh.material.needsUpdate = true;
                       }
                     }
                     break;
