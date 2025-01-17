@@ -366,6 +366,7 @@ import React, {
       // We'll set the position below after creation
       mainCamera.position.set(cameraX, 10, 10);
       mainCamera.lookAt(0, 0, 0);
+      mainCamera.layers.enable(1);
       mainCameraRef.current = mainCamera;
   
       // X-Ray Orthographic camera
@@ -644,7 +645,7 @@ import React, {
                 const fbxGroup = new THREE.Group();
                 const loader = new FBXLoader();
                 loader.load(
-                  cfg.meshUrl || '/assets/bananas.fbx',
+                  cfg.meshUrl || 'beam_vis/assets/bananas.fbx',
                   (fbx: any) => {
                     fbx.scale.set(0.02, 0.02, 0.02);
                     fbx.position.set(0, 0.3, -0.25);
@@ -867,7 +868,7 @@ import React, {
                               newObj = new THREE.Object3D();
                               const loader = new FBXLoader();
                               loader.load(
-                                  cfg.meshUrl || '/assets/bananas.fbx',
+                                  cfg.meshUrl || 'beam_vis/assets/bananas.fbx',
                                   (fbx: any) => {
                                       fbx.scale.set(0.02, 0.02, 0.02);
                                       fbx.position.set(0, 0.3, -0.25);
@@ -1239,7 +1240,7 @@ import React, {
             ? {
                 ...cfg,
                 meshType,
-                meshUrl: meshType === 'fbx' ? '/assets/bananas.fbx' : undefined,
+                meshUrl: meshType === 'fbx' ? 'beam_vis/assets/bananas.fbx' : undefined,
               }
             : cfg
         )

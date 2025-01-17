@@ -21,6 +21,7 @@ Future ideas:
 - handle reflection modes (scattering techniques)
 - beamline specific environment conditions, if applicable (ie temperature, pressure, humidity ...)
 - include relevant text labels in the visualization (i.e. PV channel, detector, stage, ...)
+- include raycasting such that objects can be clicked on in the scene. Example: clicking on the shutter will open/close it. Clicking on the stage highlights movement interactions 
 
 
 beamline documentation for reference and ideas:
@@ -39,18 +40,22 @@ beamline documentation for reference and ideas:
     - EPS interface
     - BCS vs ACQ computers
 
-
+- 7.3.3 GISAX
 
 Feedback:
 
 - Liz: That just made my day! This will be great for presentations. One use case is making the sample alignment process more user friendly. Show how the two motors are nested together.
-- Dula: Sees an impact for remote-access and visualization, stage alignment, and thinks it would be useful for other endstations where the equipment is completely shielded. In "test" mode we should be able to use the EPICS bridge to capture motor values, etc.
+- Dula: Sees an impact for remote-access and visualization, stage alignment, and thinks it would be useful for other endstations where the equipment is completely shielded. In "test" mode we should be able to use the EPICS bridge to capture motor values, etc. Monochromator: white (full), or filtered to a wavelength range (based on bandpass of mono setting that is used). Since the beam energy impacts the color of light, map the full spectrum between ~6 to 45 keV. 
 - Alex: The x-ray texture should stay the same size (orthographic camera). Different colored beam based on monochromator that is selected (white, pink, ...). A slider that moves the camera upstream and downstream. The beamstop should move out of the way.
 - Seij: Connect with beamline in a box
 - Garrett: Connect with radius 
+- Anas: update the color of the beam stop shutter button
 
 
 related work:
 
 https://controlssoftware.sns.ornl.gov/css_phoebus/
 https://www.sirepo.com/srw#/beamline/huSxLxoc?tab=beamline3d
+
+Turn vite+react into a github pages app: 
+https://medium.com/@devxprite/how-to-deploy-vite-react-app-to-github-pages-00e150f73961
