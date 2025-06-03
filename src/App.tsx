@@ -1,12 +1,8 @@
-import React, { Suspense } from 'react';
-import ThreeScene from './ThreeScene';
+import BeamlineContainer from './components/BeamlineContainer';  // adjust path
 
-const App: React.FC = () => {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ThreeScene />
-    </Suspense>
-  );
-};
+function App() {
+  // We just return the container or do any top-level providers here
+  return <BeamlineContainer />;
+}
 
 export default App;

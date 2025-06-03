@@ -55,62 +55,8 @@ import React, {
   
   /********************************************************
    * Our initial beamline config
-   *  - Includes an extra "centeringMotor" between the stage and the sample
    ********************************************************/
-  const beamlineConfig: ComponentConfig[] = [
-    {
-      id: 'beam',
-      type: 'beam',
-      transform: { position: [0, 0, 0], rotation: [0, 0, 0], scale: [1, 1, 1] },
-      geometry: { radius: 0.05, height: 8 },
-      beamModes: ['cylinder'],
-      visible: true,
-      beamPower: 25,
-      beamMono: 'Xtal', // Default to "Xtal"
-    },
-    {
-      id: 'stage',
-      type: 'stage',
-      transform: { position: [0, -0.6, 0], rotation: [0, 0, 0], scale: [1, 1, 1] },
-      geometry: { radius: 0.4, height: 1 },
-      visible: true,
-    },
-    {
-      id: 'centeringMotor', // An intermediate motor
-      type: 'motor',
-      parentId: 'stage',
-      transform: { position: [0, 0.6, 0], rotation: [0, 0, 0], scale: [1, 1, 1] },
-      visible: true,
-    },
-    {
-      id: 'sample',
-      type: 'sample',
-      parentId: 'centeringMotor',
-      transform: { position: [0, 0, 0], rotation: [0, 0, 0], scale: [1, 1, 1] },
-      geometry: { radius: 0.2, height: 0.4 },
-      visible: true,
-      meshType: 'cube',
-    },
-    {
-      id: 'detector',
-      type: 'detector',
-      transform: {
-        position: [4, 0, 0],
-        rotation: [0, Math.PI / 2, 0],
-        scale: [1, 1, 1],
-      },
-      geometry: { width: 1, height: 1, depth: 0.2 },
-      visible: true,
-    },
-    {
-      id: 'beamStop',
-      type: 'beamStop',
-      parentId: 'beam',
-      transform: { position: [-2, 0, 0], rotation: [0, 0, 0], scale: [1, 1, 1] },
-      visible: true,
-      shutterOpen: false,
-    },
-  ];
+  const beamlineConfig: ComponentConfig[] = [];
   
   /********************************************************
    * Optional textures for a custom stage
@@ -527,7 +473,7 @@ import React, {
      * X-Ray Shader Material
      ********************************************************/
     const xRayMaterial = useMemo(() => {
-      return new THREE.ShaderMaterial({
+      const mat = new THREE.ShaderMaterial({
         uniforms: {
           xRayTexture: { value: null as unknown as THREE.Texture },
           shutterOpen: { value: 0.0 },
@@ -552,9 +498,12 @@ import React, {
             gl_FragColor = vec4(finalColor, color.a);
           }
         `,
+        // Render on both sides of the face.
+        side: THREE.DoubleSide,
       });
+      return mat;
     }, []);
-  
+      
     /********************************************************
      * Build/Update the scene from configs
      ********************************************************/
@@ -1302,11 +1251,11 @@ import React, {
     }, []);
   
     // Motor sliders (move the "centeringMotor" in X, Y, Z)
-    const handleMotorXChange = useCallback((val: number) => {
+    const handleCenteringStageXChange = useCallback((val: number) => {
       setMotorX(val);
       setConfigs((prev) =>
         prev.map((cfg) =>
-          cfg.id === 'centeringMotor'
+          cfg.id === 'centeringStage'
             ? {
                 ...cfg,
                 transform: {
@@ -1319,11 +1268,11 @@ import React, {
       );
     }, []);
   
-    const handleMotorYChange = useCallback((val: number) => {
+    const handleCenteringStageYChange = useCallback((val: number) => {
       setMotorY(val);
       setConfigs((prev) =>
         prev.map((cfg) =>
-          cfg.id === 'centeringMotor'
+          cfg.id === 'centeringStage'
             ? {
                 ...cfg,
                 transform: {
@@ -1336,11 +1285,11 @@ import React, {
       );
     }, []);
   
-    const handleMotorZChange = useCallback((val: number) => {
+    const handleCenteringStageZChange = useCallback((val: number) => {
       setMotorZ(val);
       setConfigs((prev) =>
         prev.map((cfg) =>
-          cfg.id === 'centeringMotor'
+          cfg.id === 'centeringStage'
             ? {
                 ...cfg,
                 transform: {
@@ -1534,7 +1483,7 @@ import React, {
                     max={2}
                     step={0.01}
                     value={motorX}
-                    onChange={(e) => handleMotorXChange(Number(e.target.value))}
+                    onChange={(e) => handleCenteringStageXChange(Number(e.target.value))}
                     style={sliderStyle}
                   />
                 </div>
@@ -1546,7 +1495,7 @@ import React, {
                     max={2}
                     step={0.01}
                     value={motorY}
-                    onChange={(e) => handleMotorYChange(Number(e.target.value))}
+                    onChange={(e) => handleCenteringStageYChange(Number(e.target.value))}
                     style={sliderStyle}
                   />
                 </div>
@@ -1558,7 +1507,7 @@ import React, {
                     max={2}
                     step={0.01}
                     value={motorZ}
-                    onChange={(e) => handleMotorZChange(Number(e.target.value))}
+                    onChange={(e) => handleCenteringStageZChange(Number(e.target.value))}
                     style={sliderStyle}
                   />
                 </div>
